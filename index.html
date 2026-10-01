@@ -384,17 +384,62 @@
   .life-item .badge[hidden]{ display:none; }
   .life-foot{ margin-top:10px; font-size:12px; color:var(--muted); text-align:right; font-variant-numeric:tabular-nums; }
 
-  .notes{ list-style:none; margin:0; padding:16px 18px; background:var(--surface-2); border-radius:var(--r-md); display:flex; flex-direction:column; gap:8px; font-size:13px; color:var(--muted); }
+  /* ---------- 알려드려요 (강조 블록) ---------- */
+  .notice-sec{ margin-top:40px; background:#4A0A0C; color:#F3DCD6; padding-block:30px 34px; position:relative; overflow:hidden; }
+  .notice-sec::after{
+    content:""; position:absolute; right:-70px; bottom:-90px; width:240px; height:240px; border-radius:50%; pointer-events:none;
+    background:repeating-radial-gradient(circle, rgba(244,201,138,0.10) 0 2px, transparent 2px 22px);
+  }
+  .notice-sec .wrap{ position:relative; z-index:1; }
+  .notice-title{ display:flex; align-items:center; gap:10px; margin:0 0 16px; font-size:20px; font-weight:900; color:#FFFFFF; }
+  .notice-title i{
+    width:28px; height:28px; flex:0 0 28px; border-radius:50%; background:#F4C98A; color:#4A0A0C;
+    display:grid; place-items:center; font-style:normal; font-weight:900; font-size:16px;
+  }
+  .notes{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; font-size:13.5px; line-height:1.6; }
   .notes li{ display:grid; grid-template-columns:14px 1fr; gap:6px; }
-  .notes li::before{ content:""; width:5px; height:5px; border-radius:50%; background:var(--accent-text); margin-top:9px; }
+  .notes li::before{ content:""; width:6px; height:6px; border-radius:50%; background:#F4C98A; margin-top:8px; }
 
-  footer{ padding-block:34px 44px; text-align:center; font-size:12px; color:var(--muted); display:flex; flex-direction:column; gap:4px; }
+  /* ---------- 플로팅 버튼 + 안내 시트 ---------- */
+  .fabs{
+    position:fixed; z-index:20; right:max(16px, calc(50vw - 240px + 16px)); bottom:calc(18px + env(safe-area-inset-bottom, 0px));
+    display:flex; flex-direction:column; align-items:flex-end; gap:10px; pointer-events:none;
+  }
+  .fabs > *{ pointer-events:auto; }
+  .fab-info{
+    display:inline-flex; align-items:center; gap:8px; height:48px; padding:0 18px 0 8px; border:0; border-radius:999px; cursor:pointer;
+    background:var(--brand); color:#FFFFFF; font-size:14.5px; font-weight:800; box-shadow:0 8px 20px rgba(86,12,14,0.35);
+    transition:transform .25s, opacity .25s;
+  }
+  .fab-info i{ width:32px; height:32px; border-radius:50%; background:#F4C98A; color:#4A0A0C; display:grid; place-items:center; font-style:normal; font-weight:900; font-size:16px; }
+  .fab-top{
+    width:46px; height:46px; border:0; border-radius:50%; cursor:pointer; background:#FFFFFF; color:var(--ink);
+    box-shadow:0 6px 16px rgba(86,12,14,0.22); display:grid; place-items:center; transition:transform .25s, opacity .25s;
+  }
+  .fab-top svg, .info-close svg{ width:22px; height:22px; stroke:currentColor; fill:none; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
+  .fabs .off{ opacity:0; transform:translateY(12px) scale(.9); pointer-events:none; }
+  .fab-info:active, .fab-top:active{ transform:scale(.95); }
+  .info-wrap{ position:fixed; inset:0; z-index:40; background:rgba(0,0,0,0.5); display:flex; justify-content:center; align-items:flex-end; animation:fadeIn .2s ease; }
+  @keyframes fadeIn{ from{ opacity:0; } }
+  .info-sheet{
+    width:100%; max-width:480px; max-height:85%; overflow-y:auto; background:#4A0A0C; color:#F3DCD6;
+    border-radius:22px 22px 0 0; padding:0 20px calc(28px + env(safe-area-inset-bottom, 0px)); animation:sheetUp .32s cubic-bezier(.2,.8,.2,1);
+  }
+  .info-sheet:focus{ outline:none; }
+  @keyframes sheetUp{ from{ transform:translateY(60px); opacity:.3; } }
+  .info-sheet .grab{ display:flex; justify-content:center; padding:10px 0 6px; }
+  .info-sheet .grab span{ width:40px; height:4px; border-radius:999px; background:rgba(255,255,255,0.3); }
+  .info-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:4px; }
+  .info-head .notice-title{ margin:8px 0 12px; }
+  .info-close{ width:44px; height:44px; border:0; border-radius:50%; background:rgba(255,255,255,0.1); color:#FFFFFF; display:grid; place-items:center; cursor:pointer; }
+
+  footer{ padding-block:34px 96px; text-align:center; font-size:12px; color:var(--muted); display:flex; flex-direction:column; gap:4px; }
   footer .foot-title{ font-size:13px; font-weight:900; color:var(--ink); }
   footer a{ color:var(--accent-text); font-weight:700; text-underline-offset:3px; }
   footer .foot-mail{ font-size:11.5px; user-select:all; -webkit-user-select:all; }
 
   .toast{
-    position:fixed; left:50%; bottom:calc(20px + env(safe-area-inset-bottom, 0px)); transform:translate(-50%, 20px);
+    position:fixed; left:50%; bottom:calc(84px + env(safe-area-inset-bottom, 0px)); transform:translate(-50%, 20px);
     background:#2A1210; color:#FFFFFF; border-radius:16px; padding:12px 18px; font-size:14px; font-weight:700; line-height:1.5;
     text-align:center; white-space:pre-line; word-break:keep-all; box-shadow:0 10px 24px rgba(42,18,16,0.25);
     width:max-content; max-width:min(calc(100% - 32px), 340px);
@@ -564,18 +609,33 @@
   </div>
 </section>
 
-<section class="sec">
+<section class="notice-sec" id="notice" aria-labelledby="noticeTitle">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">참여 안내</span><h2>알려드려요</h2></div>
-    <ul class="notes">
+    <h2 class="notice-title" id="noticeTitle"><i aria-hidden="true">!</i>알려드려요</h2>
+    <ul class="notes" id="noticeList">
       <li>응원 메시지 1건마다 식사 1그릇이 영등포구 이웃에게 기부돼요</li>
       <li>쿠폰은 응원을 남긴 매장에서 직원 확인 후 사용할 수 있어요<br>식사 매장은 2천 원 할인, 카페는 1천 원 할인, 본우리집밥은 디저트 교환이에요</li>
-      <li>매장마다 한정 수량으로 발급되고, 소진된 뒤에도 응원은 한 그릇으로 기부돼요</li>
+      <li>매장마다 한정 수량이 있어요<br>소진된 뒤에도 응원은 한 그릇으로 기부돼요</li>
       <li>쿠폰은 발급한 당일까지 유효해요<br>날짜가 지나면 사라지니 다시 참여해 주세요</li>
       <li>캠페인 기간: [0000.00.00 ~ 0000.00.00]</li>
     </ul>
   </div>
 </section>
+
+<div class="fabs" id="fabs">
+  <button class="fab-info off" id="fabInfo" type="button" aria-haspopup="dialog"><i aria-hidden="true">!</i>알려드려요</button>
+  <button class="fab-top off" id="fabTop" type="button" aria-label="맨 위로"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button>
+</div>
+<div class="info-wrap" id="infoWrap" hidden>
+  <div class="info-sheet" id="infoSheet" role="dialog" aria-modal="true" aria-labelledby="infoTitle" tabindex="-1">
+    <div class="grab" aria-hidden="true"><span></span></div>
+    <div class="info-head">
+      <h2 class="notice-title" id="infoTitle"><i aria-hidden="true">!</i>알려드려요</h2>
+      <button class="info-close" id="infoClose" type="button" aria-label="닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+    </div>
+    <ul class="notes" id="infoList"></ul>
+  </div>
+</div>
 
 <footer>
   <span class="foot-title">정성 한 그릇, 행복 한 그릇</span>
@@ -592,7 +652,7 @@
    비워 두면 집계 없이 이 기기에서만 동작하는 미리보기 모드예요
    ========================================================= */
 var JS_CONFIG = {
-  apiUrl: 'https://script.google.com/macros/s/AKfycbx0pS35V29pZO5qimBd-xlYyHupFrLuqdTuscEV3uYDT3PqhPEkZ8bxRplEbwV37Nmi/exec',
+  apiUrl: '',
   refreshSeconds: 30,
   // 아래는 집계 주소가 비어 있을 때(미리보기)만 쓰여요
   previewBase: 0,          // 미리보기에서 보여줄 시작 그릇 수
@@ -646,7 +706,7 @@ var JS_CONFIG = {
   function clockOf(iso){ var m = /T(\d{2}):(\d{2})/.exec(iso || ''); return m ? m[1] + ':' + m[2] : hm(Date.now()); }
 
   /* ---------- per-device state ---------- */
-  var state = { mine:0, byLife:{}, vouchers:{}, localIssued:{} };
+  var state = { mine:0, byLife:{}, vouchers:{}, localIssued:{}, pending:[] };
   var shownStore = '';
   try {
     var raw = localStorage.getItem(KEY);
@@ -654,7 +714,8 @@ var JS_CONFIG = {
       var s = JSON.parse(raw);
       state.mine = s.mine || 0;
       state.byLife = s.byLife || {};
-      state.localIssued = s.localIssued || {};
+      state.localIssued = s.localIssued || {};   // 미리보기: 매장별 사용 완료 수
+      state.pending = s.pending || [];          // 아직 시트에 못 보낸 사용 처리
       var tk = todayKey(), vs = s.vouchers || {};
       if(s.voucher && s.voucher.store) vs[s.voucher.store] = vs[s.voucher.store] || s.voucher;
       Object.keys(vs).forEach(function(k){ if(vs[k] && vs[k].day === tk) state.vouchers[k] = vs[k]; });
@@ -1041,7 +1102,6 @@ var JS_CONFIG = {
 
     if(!LIVE){
       var pc = couponOf(store), give = !state.vouchers[store] && !pc.soldOut;
-      if(give) state.localIssued[store] = (state.localIssued[store] || 0) + 1;
       complete(msg, to, store, (JS_CONFIG.previewBase || 0) + state.mine + 1, { issued:give, type:pc.type });
       return;
     }
@@ -1116,8 +1176,9 @@ var JS_CONFIG = {
   }
   if(LIVE){
     loadStats();
-    setInterval(function(){ if(!document.hidden) loadStats(); }, REFRESH_MS);
-    document.addEventListener('visibilitychange', function(){ if(!document.hidden) loadStats(); });
+    flushPending();
+    setInterval(function(){ if(!document.hidden){ loadStats(); flushPending(); } }, REFRESH_MS);
+    document.addEventListener('visibilitychange', function(){ if(!document.hidden){ loadStats(); flushPending(); } });
   }
 
   $('againBtn').addEventListener('click', function(){
@@ -1132,12 +1193,70 @@ var JS_CONFIG = {
     var cv = curV();
     if(!cv || cv.used) return;
     cv.used = true; cv.usedAt = Date.now();
+    if(LIVE){ state.pending.push({ store:cv.store, seq:cv.seq }); }
+    else { state.localIssued[cv.store] = (state.localIssued[cv.store] || 0) + 1; }
     renderVoucher();
     save();
+    refresh();
     if(navigator.vibrate){ try{ navigator.vibrate(40); }catch(e){} }
     toast('쿠폰 사용 처리됐어요');
+    flushPending();
+  }
+  // 사용 처리 기록을 시트로 보내요 (화면은 이미 바뀌었으니 기다리지 않아요, 실패하면 다음에 다시 보내요)
+  var flushing = false;
+  function flushPending(){
+    if(!LIVE || flushing || !state.pending.length) return;
+    flushing = true;
+    var item = state.pending[0];
+    fetch(API_URL, {
+      method:'POST', keepalive:true,
+      headers:{ 'Content-Type':'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action:'redeem', store:item.store, seq:item.seq, device:deviceId })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      flushing = false;
+      if(res && (res.ok || !res.retryable)){
+        state.pending.shift(); save();
+        if(res.ok) applyStats(res);
+      }
+      if(state.pending.length && (!res || !res.retryable)) flushPending();
+      else if(state.pending.length) setTimeout(flushPending, 5000);
+    })
+    .catch(function(){ flushing = false; setTimeout(flushPending, 8000); });
   }
   redeemBtn.addEventListener('click', finishRedeem);
+
+  /* ---------- 플로팅: 알려드려요 시트 + 맨 위로 ---------- */
+  (function(){
+    var fabInfo = $('fabInfo'), fabTop = $('fabTop'), wrap = $('infoWrap'), sheet = $('infoSheet');
+    $('infoList').innerHTML = $('noticeList').innerHTML;
+    var noticeVisible = false, lastFocus = null;
+    function update(){
+      var y = window.scrollY || document.documentElement.scrollTop;
+      fabInfo.classList.toggle('off', y < 420 || noticeVisible);
+      fabTop.classList.toggle('off', y < 900);
+    }
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(en){ noticeVisible = en[0].isIntersecting; update(); }, { threshold:0.15 }).observe($('notice'));
+    }
+    window.addEventListener('scroll', update, { passive:true });
+    update();
+    function openInfo(){
+      lastFocus = document.activeElement;
+      wrap.hidden = false; document.body.style.overflow = 'hidden';
+      sheet.focus();
+    }
+    function closeInfo(){
+      wrap.hidden = true; document.body.style.overflow = '';
+      if(lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    fabInfo.addEventListener('click', openInfo);
+    $('infoClose').addEventListener('click', closeInfo);
+    wrap.addEventListener('click', function(e){ if(e.target === wrap) closeInfo(); });
+    sheet.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ e.preventDefault(); closeInfo(); } });
+    fabTop.addEventListener('click', function(){ window.scrollTo({ top:0, behavior: reduced ? 'auto' : 'smooth' }); });
+  })();
 
   /* share */
   var toastTimer = null;
