@@ -1032,8 +1032,7 @@ var JS_CONFIG = {
   schedule: [
     { week:0.5, label:'사전 오픈', start:'2026-11-09', end:'2026-11-09', stores:['jipbap'] },
     { week:1, start:'2026-11-16', end:'2026-11-22', stores:['bansang', 'ilmaggio'] },
-    { week:2, start:'2026-11-23', end:'2026-11-29', stores:['bonjuk', 'dosirak', 'mengi'] },
-    { week:3, start:'2026-11-30', end:'2026-12-06', stores:['easybrew'] },
+    { week:2, start:'2026-11-23', end:'2026-11-29', stores:['bonjuk', 'dosirak', 'mengi', 'easybrew'] },
     { week:4, start:'2026-12-07', end:'2026-12-13', stores:['gukbap'] }
   ],
   today: ''                // 테스트용 날짜 'YYYY-MM-DD' (비우면 실제 오늘, 주소 끝 ?date=2026-11-24 로도 확인 가능)
@@ -1066,7 +1065,7 @@ var JS_CONFIG = {
   var STORES = [
     { id:'bonjuk',   map:'https://naver.me/58NdQouU', mono:'🍚', name:'본죽&비빔밥 영등포구청역점',   loc:'영등포구청역',     desc:'든든하게 몸을 챙기는 죽 한 그릇의 마음' , reward:'2천 원 할인' },
     { id:'dosirak',  map:'https://naver.me/FioIc93L', mono:'🍱', name:'본도시락 영등포구청점',        loc:'영등포구청역',     desc:'바쁜 하루 속 한 끼, 도시락에 담긴 정성' , reward:'2천 원 할인' },
-    { id:'easybrew', mono:'☕', mapq:'이지브루잉커피 양평동', name:'이지브루잉커피',              loc:'본그룹 본사 인근',  desc:'잠깐의 휴식, 커피 한 잔에 더하는 작은 참여' , reward:'2천 원 할인', prefix:'빵 ', total:250, note:'빵 구매 시 사용 가능' },
+    { id:'easybrew', mono:'☕', mapq:'이지브루잉커피 양평동', name:'이지브루잉커피',              loc:'본그룹 본사 인근',  desc:'잠깐의 휴식, 커피 한 잔에 더하는 작은 참여' , reward:'2천 원 할인', prefix:'빵 ', total:250, note:'빵 구매 시에만 사용할 수 있어요' },
     { id:'ilmaggio', mono:'🥤', short:'일마지오', mapq:'일마지오 본그룹본사점', name:'카페 일마지오 본그룹본사점',   loc:'본그룹 본사',      desc:'잠깐의 휴식, 커피 한 잔에 더하는 작은 참여' , reward:'디저트 교환', total:250, pickup:true },
     { id:'jipbap',   nomap:true, only:'임직원, 입주사 고객 전용', mono:'🍽️', name:'본우리집밥 본그룹본사점',      loc:'본그룹 본사',      desc:'집밥 같은 한 끼로 전하는 다정한 마음' , reward:'디저트 교환', item:'피자설기', daily:200, note:'당일 교환만 가능' },
     { id:'mengi',    mono:'🍜', name:'멘지 롯데마트 양평점',          loc:'양평동',          desc:'일상 속 따끈한 라멘 한 그릇의 행복' , reward:'메뉴 교환', item:'치킨가라아게', total:100, note:'계산 시 직원에게 보여주세요 · 주문 1건당 1장 사용' },
