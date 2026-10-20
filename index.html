@@ -1020,7 +1020,7 @@
    비워 두면 집계 없이 이 기기에서만 동작하는 미리보기 모드예요
    ========================================================= */
 var JS_CONFIG = {
-  apiUrl: 'https://script.google.com/macros/s/AKfycbwrsjcb3ZJfpzG3I16kkSVoKuQTaoMVDZJedCv0rRIn-772l0j-Si-PFIem8DXHTKue/exec',
+  apiUrl: 'https://script.google.com/macros/s/AKfycbx0pS35V29pZO5qimBd-xlYyHupFrLuqdTuscEV3uYDT3PqhPEkZ8bxRplEbwV37Nmi/exec',
   refreshSeconds: 30,
   // 아래는 집계 주소가 비어 있을 때(미리보기)만 쓰여요
   previewBase: 0,          // 미리보기에서 보여줄 시작 그릇 수
@@ -1750,11 +1750,28 @@ var JS_CONFIG = {
     renderLifeCounts();
     refresh();
   }
+  function syncMine(mine){
+    if(!mine || !mine.length && !voucherIds().length) return;
+    var changed = false;
+    voucherIds().forEach(function(id){
+      var v = state.vouchers[id]; if(!v || v.seq == null) return;
+      if(state.pending.some(function(p){ return p.store === id && p.seq === v.seq; })) return;   // 아직 시트로 보내는 중
+      var m = null; for(var i=0;i<mine.length;i++){ if(mine[i].store === id && +mine[i].seq === +v.seq){ m = mine[i]; break; } }
+      if(!m){ delete state.vouchers[id]; changed = true; return; }                                  // 시트에서 지운 쿠폰 → 없던 일로
+      if(m.status === 'issued' && (v.used || v.void)){ v.used = false; v.usedAt = null; v.void = false; changed = true; }   // 사용 전으로 되돌림
+      else if(m.status === 'used' && !v.used){ v.used = true; v.usedAt = Date.now(); v.void = false; changed = true; }
+    });
+    if(!changed) return;
+    save();
+    var ids = voucherIds();
+    if(!state.vouchers[shownStore]) shownStore = ids.length ? ids[ids.length - 1] : '';
+    renderVoucher(); refresh();
+  }
   function loadStats(){
     if(!LIVE) return;
-    fetch(API_URL, { method:'GET' })
+    fetch(API_URL + (voucherIds().length ? (API_URL.indexOf('?') < 0 ? '?' : '&') + 'v=' + encodeURIComponent(voucherIds().map(function(id){ return id + ':' + state.vouchers[id].seq; }).join(',')) : ''), { method:'GET' })
       .then(function(r){ return r.json(); })
-      .then(applyStats)
+      .then(function(res){ applyStats(res); if(res && res.mine) syncMine(res.mine); })
       .catch(function(){ stats.failed = true; renderTally(false); renderLifeCounts(); });
   }
   if(LIVE){
