@@ -368,7 +368,7 @@
 
   .my-coupons{ margin-bottom:14px; display:flex; flex-direction:column; gap:8px; }
   .my-title{ font-size:12.5px; font-weight:700; color:var(--muted); font-variant-numeric:tabular-nums; }
-  .my-list{ display:flex; gap:8px; overflow-x:auto; padding-bottom:2px; scrollbar-width:none; }
+  .my-list{ display:flex; flex-wrap:wrap; gap:8px; }
   .my-list::-webkit-scrollbar{ display:none; }
   .my-chip{ flex:0 0 auto; min-height:40px; border:1.5px solid var(--line); background:var(--surface); color:var(--ink); border-radius:999px; padding:6px 14px; font-size:12.5px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px; }
   .my-chip[aria-pressed="true"]{ border-color:var(--brand); background:var(--brand); color:#FFFFFF; }
@@ -1682,7 +1682,7 @@ var JS_CONFIG = {
       : !kSel ? 'STEP 1 빈칸을 채워 주세요'
       : !mSel ? '정성을 보낼 사람을 골라 주세요'
       : !hasMsg ? '나만의 정성을 적어 주세요'
-      : (canGet ? '📮 정성과 행복 보내고 ' + rwOf(c.type, sel.value).hook + ' 받기' : '📮 정성과 행복 보내기');
+      : (canGet ? '📮 보내고 ' + rwOf(c.type, sel.value).hook + ' 받기' : '📮 정성 보내기');
     renderStock();
   }
   ta.addEventListener('input', refresh);
@@ -1881,11 +1881,12 @@ var JS_CONFIG = {
     renderLifeCounts();
     refresh();
   }
-  function syncMine(mine){
+  function syncMine(mine, asked){
     if(!mine || !mine.length && !voucherIds().length) return;
     var changed = false;
     voucherIds().forEach(function(id){
       var v = state.vouchers[id]; if(!v || v.seq == null) return;
+      if(!asked || asked.indexOf(id + ':' + v.seq) < 0) return;   // 이번 조회에 포함되지 않은 쿠폰(방금 받은 쿠폰 등)은 건드리지 않아요
       if(state.pending.some(function(p){ return p.store === id && p.seq === v.seq; })) return;   // 아직 시트로 보내는 중
       var m = null; for(var i=0;i<mine.length;i++){ if(mine[i].store === id && +mine[i].seq === +v.seq){ m = mine[i]; break; } }
       if(!m || m.status === 'none'){ delete state.vouchers[id]; changed = true; return; }           // 시트에서 지우거나 비운 쿠폰 → 없던 일로
@@ -1900,9 +1901,10 @@ var JS_CONFIG = {
   }
   function loadStats(){
     if(!LIVE) return;
-    fetch(API_URL + (voucherIds().length ? (API_URL.indexOf('?') < 0 ? '?' : '&') + 'v=' + encodeURIComponent(voucherIds().map(function(id){ return id + ':' + state.vouchers[id].seq; }).join(',')) : ''), { method:'GET' })
+    var asked = voucherIds().filter(function(id){ return state.vouchers[id].seq != null; }).map(function(id){ return id + ':' + state.vouchers[id].seq; });
+    fetch(API_URL + (asked.length ? (API_URL.indexOf('?') < 0 ? '?' : '&') + 'v=' + encodeURIComponent(asked.join(',')) : ''), { method:'GET' })
       .then(function(r){ return r.json(); })
-      .then(function(res){ applyStats(res); if(res && res.mine) syncMine(res.mine); renderVisits(res && res.visits); })
+      .then(function(res){ applyStats(res); if(res && res.mine) syncMine(res.mine, asked); renderVisits(res && res.visits); })
       .catch(function(){ stats.failed = true; renderTally(false); renderLifeCounts(); });
   }
   function renderVisits(v){ if(!v) return; $('vToday').textContent = fmt(v.today || 0); $('vTotal').textContent = fmt(v.total || 0); $('visitBar').hidden = false; }
