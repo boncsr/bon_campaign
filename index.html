@@ -395,6 +395,7 @@
   .t-logo img{ display:block; height:18px; width:auto; max-width:min(124px, 30vw); object-fit:contain; }
   .ticket-top .live{ white-space:nowrap; font-size:12.5px; }
   .t-logo.jip img{ height:24px; }
+  .t-logo.ilm img{ height:14px; }
   .staff-warn{ display:flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; background:#FFF4D6; color:#7A4A00; font-size:13px; font-weight:800; line-height:1.4; }
   .staff-warn i{ flex:0 0 22px; height:22px; border-radius:50%; background:#E1A33A; color:#FFFFFF; font-style:normal; font-weight:900; display:flex; align-items:center; justify-content:center; font-size:13px; }
   .redeem.staff{ border:2px dashed #C8242B; color:#C8242B; background:repeating-linear-gradient(135deg, #FFF 0 12px, #FFF5F4 12px 24px); }
@@ -613,6 +614,70 @@
   .sm-opt.cur{ background:var(--blush); color:var(--accent-text); }
   .sm-nm{ min-width:0; word-break:keep-all; line-height:1.35; }
   .sm-opt .phase-chip{ flex:0 0 auto; }
+
+  /* ---------- HOME (캠페인 안내) ---------- */
+  .home-sec{ display:none; }
+  html.home-mode .home-sec{ display:block; }
+  html.home-mode .hero, html.home-mode #composer, html.home-mode #voucherSec, html.home-mode .sec,
+  html.home-mode #notice, html.home-mode .fab-info, html.home-mode #fabTop{ display:none !important; }
+  .home-hero{ background:#640A0C; color:#FFFFFF; text-align:center; padding:30px 0 70px; }
+  .home-hero .wrap{ display:flex; flex-direction:column; align-items:center; gap:14px; }
+  .hm-chip{ font-size:12.5px; font-weight:800; border:1.5px solid rgba(255,255,255,0.6); border-radius:999px; padding:5px 14px; }
+  .hm-title img{ display:block; width:min(80vw, 320px); height:auto; transform:translateX(4.9%); margin:6px auto 0; }
+  .hm-lede{ margin:0; font-size:15px; line-height:1.65; color:rgba(255,255,255,0.92); }
+  .hm-lede b{ color:#F4C98A; }
+  .hm-period{ font-size:14px; font-weight:900; color:#4A0A0C; background:#F4C98A; border-radius:999px; padding:6px 16px; font-variant-numeric:tabular-nums; }
+  .hm-count{ font-size:13px; font-weight:700; color:rgba(255,255,255,0.85); }
+  .hm-count b{ font-size:16px; color:#FFFFFF; font-weight:900; font-variant-numeric:tabular-nums; }
+  .hm-tags{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:6px; }
+  .hm-tags span{ font-family:'Black Han Sans', var(--sans); font-size:17px; font-weight:400; color:#FFFFFF; background:rgba(255,255,255,0.14); border:1.5px solid rgba(244,201,138,0.6); border-radius:999px; padding:5px 13px; }
+  .hm-tags span:nth-child(odd){ color:#F4C98A; }
+  .home-body{ margin-top:-46px; position:relative; display:flex; flex-direction:column; gap:14px; padding-bottom:20px; }
+  .hm-card{ background:var(--surface); border-radius:var(--r-lg); box-shadow:var(--shadow); padding:22px 20px; display:flex; flex-direction:column; gap:14px; }
+  .hm-eyebrow{ font-family:'Black Han Sans', var(--sans); font-size:15px; color:var(--accent-text); letter-spacing:0.01em; }
+  .hm-card h2{ margin:-8px 0 0; font-size:20px; font-weight:900; letter-spacing:-0.02em; line-height:1.35; word-break:keep-all; }
+  .hm-card .hm-sub{ margin:-6px 0 0; font-size:13.5px; color:var(--muted); line-height:1.6; word-break:keep-all; }
+  .hm-mine{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 16px; border-radius:14px; background:var(--brand); color:#FFFFFF; text-decoration:none; font-size:14.5px; font-weight:900; }
+  .hm-mine[hidden]{ display:none; }
+  .hm-steps{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+  .hm-steps li{ display:flex; gap:12px; align-items:flex-start; }
+  .hm-steps .n{ flex:0 0 28px; height:28px; border-radius:50%; background:var(--brand); color:#FFFFFF; font-size:13px; font-weight:900; display:flex; align-items:center; justify-content:center; }
+  .hm-steps b{ display:block; font-size:15.5px; font-weight:900; line-height:1.4; }
+  .hm-steps span{ font-size:13px; color:var(--muted); line-height:1.55; word-break:keep-all; }
+  .hm-big{ display:flex; align-items:center; justify-content:center; gap:10px; padding:16px; border-radius:16px; background:var(--blush); color:var(--accent-text); font-size:19px; font-weight:900; text-align:center; word-break:keep-all; }
+  .hm-big small{ display:block; font-size:12.5px; font-weight:700; color:var(--muted); margin-top:2px; }
+  .hm-life{ display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:6px; }
+  .hm-life span{ display:flex; flex-direction:column; align-items:center; gap:4px; padding:10px 4px; border-radius:12px; background:var(--ground); font-size:12px; font-weight:800; color:var(--ink); text-align:center; }
+  .hm-life span i{ font-style:normal; font-size:22px; }
+  .hm-grid{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:8px; }
+  .hm-store{ display:flex; flex-direction:column; align-items:center; gap:5px; padding:14px 8px 12px; border-radius:14px; background:#FFFFFF; border:1.5px solid var(--line); cursor:pointer; font:inherit; text-align:center; }
+  .hm-store:hover, .hm-store:focus-visible{ border-color:var(--brand); outline:none; }
+  .hm-store img{ display:block; height:22px; width:auto; max-width:100%; object-fit:contain; }
+  .hm-store.wide img{ height:auto; width:100%; max-width:150px; }
+  .hm-store.jip img{ height:28px; }
+  .hm-store.ilm img{ height:16px; }
+  .logo-tile.lg-ilmaggio img{ height:18px; }
+  .st-tile img[alt*='일마지오']{ height:18px; }
+  .hm-store .br{ font-size:11.5px; font-weight:800; color:var(--muted); }
+  .hm-store .rw{ font-size:12px; font-weight:900; color:var(--accent-text); line-height:1.35; word-break:keep-all; }
+  .hm-store .pd{ font-size:11px; font-weight:700; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .hm-store .st{ font-size:10.5px; font-weight:900; border-radius:999px; padding:2px 8px; background:var(--surface-2); color:var(--muted); }
+  .hm-store .st.live{ background:#E6F4EC; color:var(--ok); }
+  .hm-store .st.rwc{ margin-top:2px; font-size:12px; font-weight:900; color:#FFFFFF; background:var(--brand); padding:4px 10px; line-height:1.35; word-break:keep-all; }
+  .hm-who{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .hm-who li{ display:flex; gap:10px; align-items:flex-start; font-size:14px; font-weight:700; line-height:1.5; word-break:keep-all; }
+  .hm-who li::before{ content:""; flex:0 0 8px; height:8px; margin-top:8px; border-radius:50%; background:var(--brand); }
+  .hm-who li small{ display:block; font-size:12.5px; font-weight:600; color:var(--muted); }
+  .hm-prog{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .hm-prog li{ display:flex; gap:10px; align-items:center; font-size:13.5px; font-weight:700; }
+  .hm-prog li em{ font-style:normal; flex:0 0 52px; text-align:center; font-size:11.5px; font-weight:900; color:#FFFFFF; background:var(--brand); border-radius:999px; padding:3px 0; }
+  .hm-btns{ display:flex; flex-direction:column; gap:8px; }
+  .hm-btn{ min-height:46px; display:flex; align-items:center; justify-content:center; gap:6px; border-radius:12px; font:inherit; font-size:14px; font-weight:800; text-decoration:none; cursor:pointer; border:1.5px solid var(--line); background:var(--surface); color:var(--ink); }
+  .hm-btn.pri{ background:var(--brand); border-color:var(--brand); color:#FFFFFF; }
+  .hm-cta{ text-align:center; padding:6px 0 0; display:flex; flex-direction:column; gap:6px; align-items:center; }
+  .hm-cta b{ font-size:16px; font-weight:900; color:var(--ink); word-break:keep-all; }
+  .hm-cta span{ font-size:12.5px; color:var(--muted); }
+  .sm-opt.home-opt{ font-weight:900; color:var(--accent-text); border-bottom:1px solid var(--line); border-radius:10px 10px 0 0; margin-bottom:4px; }
   /* ---------- 임직원 도장깨기 챌린지 ---------- */
   body.staff-mode .hero, body.staff-mode #composer, body.staff-mode #voucherSec, body.staff-mode .sec,
   body.staff-mode #notice, body.staff-mode .fab-info, body.staff-mode #fabTop{ display:none !important; }
@@ -749,6 +814,7 @@
   .visit-note{ font-size:11.5px; font-weight:700; color:var(--muted); white-space:nowrap; }
   .visit-strong{ color:var(--brand); font-weight:800; }
 </style>
+<script>(function(){ var h = (location.hash || '').replace('#', ''); if(!h || h === 'home') document.documentElement.classList.add('home-mode'); })();</script>
 </head>
 <body>
 
@@ -763,6 +829,77 @@
     </div>
   </div>
 </header>
+
+<section class="home-sec" id="homeSec" aria-labelledby="homeTitle">
+  <div class="home-hero">
+    <div class="wrap">
+      <span class="hm-chip">본그룹 사회공헌 캠페인</span>
+      <h1 class="hm-title" id="homeTitle"><img id="homeTitleImg" alt="정성 한 그릇, 행복 한 그릇"></h1>
+      <p class="hm-lede">정성을 나누면<br>이웃에게는 <b>따뜻한 한 끼</b>, 나에게는 <b>리워드</b></p>
+      <span class="hm-period">2026.11.16(월) ~ 11.30(월)</span>
+      <span class="hm-count">지금까지 <b id="homeCount">0</b>건 참여</span>
+      <div class="hm-tags" aria-hidden="true"><span>#사회공헌</span><span>#영등포구</span><span>#본브랜드</span><span>#8개매장</span><span>#정성</span><span>#행복</span><span>#기부</span><span>#리워드</span><span>#선착순</span></div>
+    </div>
+  </div>
+  <div class="wrap home-body">
+    <a class="hm-mine" id="homeMine" href="#" hidden><span id="homeMineText">오늘 받은 쿠폰 보기</span><span aria-hidden="true">→</span></a>
+
+    <div class="hm-card">
+      <span class="hm-eyebrow">#참여방법</span>
+      <h2>매장에서 30초면 끝</h2>
+      <ol class="hm-steps">
+        <li><span class="n">1</span><div><b>참여 매장 방문 · QR 찍기</b><span>매장에 놓인 QR을 휴대폰 카메라로 찍어요</span></div></li>
+        <li><span class="n">2</span><div><b>빈칸 채우고 정성 보내기</b><span>‘ㅈㅅ 한 그릇, ㅎㅂ 한 그릇’ 빈칸을 채우고 정성을 보내요</span></div></li>
+        <li><span class="n">3</span><div><b>리워드 쿠폰 받기</b><span>계산할 때 카운터 직원에게 쿠폰을 보여주세요</span></div></li>
+      </ol>
+    </div>
+
+    <div class="hm-card">
+      <span class="hm-eyebrow">#기부 #영등포구</span>
+      <h2>참여 1건 = 식사 1그릇</h2>
+      <p class="hm-sub">본그룹이 참여 1건마다 식사 1그릇을 매칭 기부해요<br>(영등포구사회복지협의회 후원 / 최대 500그릇)</p>
+      <div class="hm-life" aria-label="식사가 전달되는 이웃">
+        <span><i aria-hidden="true">👶🏻</i>영유아</span><span><i aria-hidden="true">🧒🏻</i>아동</span><span><i aria-hidden="true">👩🏻</i>청년</span><span><i aria-hidden="true">🧓🏻</i>어르신</span>
+      </div>
+      <p class="hm-sub" style="margin:0">식사 지원이 필요한 영등포구 취약계층 이웃에게 전달돼요</p>
+    </div>
+
+    <div class="hm-card">
+      <span class="hm-eyebrow">#본브랜드 #8개매장</span>
+      <h2>참여 브랜드와 리워드</h2>
+      <p class="hm-sub"><b style="color:var(--ink)">가까운 참여 매장에 방문해 QR로 정성을 나눠 주세요</b><br>로고를 누르면 매장 위치와 자세한 내용을 볼 수 있어요</p>
+      <div class="hm-grid" id="homeStores"></div>
+    </div>
+
+    <div class="hm-card">
+      <span class="hm-eyebrow">#누구나 #선착순</span>
+      <h2>누가 참여할 수 있나요?</h2>
+      <ul class="hm-who">
+        <li><div>참여 매장에 방문한 누구나<small>매장에 놓인 QR로만 참여할 수 있어요</small></div></li>
+        <li><div>매장별로 하루 1번, 쿠폰 1장<small>쿠폰은 발급한 당일, 참여한 매장에서만 사용할 수 있어요</small></div></li>
+        <li><div>선착순 한정 수량 · 소진 시 마감<small>매장마다 리워드와 수량이 달라요</small></div></li>
+        <li><div>본우리집밥 본그룹본사점은 임직원·입주사 고객 전용이에요<small>11월 23일(월) 단 하루 진행해요</small></div></li>
+      </ul>
+    </div>
+
+    <div class="hm-card">
+      <span class="hm-eyebrow">#본그룹사회공헌</span>
+      <h2>정성을 담아 전하는<br>생애주기별 식생활 지원</h2>
+      <p class="hm-sub">브랜드의 특성을 살려 생애주기에 맞춘 식생활을 지원해요</p>
+      <ul class="hm-prog">
+        <li><em>영유아</em>베이비본죽 지지특공대</li>
+        <li><em>아동</em>본도시락 생일은 특별하게</li>
+        <li><em>청년</em>본우리집밥 함께차린 청년밥상</li>
+        <li><em>어르신</em>어르신 본죽 왔어요</li>
+      </ul>
+      <div class="hm-btns">
+        <button class="hm-btn pri" type="button" id="homeCsr">본그룹 사회공헌 자세히 보기</button>
+        <a class="hm-btn" id="homeYt" href="#" target="_blank" rel="noopener">사회공헌 유튜브 채널</a>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <section class="staff" id="staffSec" hidden aria-labelledby="staffName">
   <div class="staff-hero">
@@ -1052,7 +1189,7 @@
       <h2 class="csr-title" id="csrTitle">본그룹 사회공헌<br>'정성 한 그릇, 행복 한 그릇'</h2>
       <button class="info-close" id="csrClose" type="button" aria-label="닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
     </div>
-    <p class="csr-sheet-lead">본업과 각 브랜드의 특성을 살려, 생애주기에 맞춘 식생활을 지원해요</p>
+    <p class="csr-sheet-lead">브랜드의 특성을 살려 생애주기에 맞춘 식생활을 지원해요</p>
     <ol class="csr-list">
       <li><span class="age">영유아</span><div><b>베이비본죽 지지특공대</b><p>베이비본죽은 영유아와 함께 줍깅, 완밥을 실천하고 취약계층 영유아에게 이유식을 기부합니다</p></div></li>
       <li><span class="age">아동</span><div><b>본도시락 생일은 특별하게</b><p>본도시락은 그룹홈 아이들에게 생일파티를 선물하고, 건강한 사회구성원으로 성장할 수 있도록 응원합니다</p></div></li>
@@ -1087,10 +1224,8 @@ var JS_CONFIG = {
 
   // 매장별 운영 일정 (날짜로만 표기) · 실제 운영은 시트 [쿠폰설정] 값이 우선이에요
   schedule: [
-    { week:1, start:'2026-11-16', end:'2026-11-20', stores:['ilmaggio'] },
-    { week:1, start:'2026-11-16', end:'2026-11-30', stores:['bansang', 'gukbap', 'mengi', 'dosirak'] },
-    { week:2, start:'2026-11-23', end:'2026-11-23', stores:['jipbap'] },
-    { week:2, start:'2026-11-23', end:'2026-11-30', stores:['bonjuk', 'easybrew'] }
+    { week:1, start:'2026-11-16', end:'2026-11-30', stores:['ilmaggio', 'bansang', 'gukbap', 'mengi', 'dosirak', 'bonjuk', 'easybrew'] },
+    { week:2, start:'2026-11-23', end:'2026-11-23', stores:['jipbap'] }
   ],
   today: ''                // 테스트용 날짜 'YYYY-MM-DD' (비우면 실제 오늘, 주소 끝 ?date=2026-11-24 로도 확인 가능)
 };
@@ -1120,11 +1255,11 @@ var JS_CONFIG = {
   var FIXED_STORE = (function(){ var h = (location.hash || '').replace('#', ''); return STORE_IDS.indexOf(h) >= 0 ? h : ((window.JS_CONFIG && JS_CONFIG.store) || ''); })();
   var DAILY = (window.JS_CONFIG && JS_CONFIG.dailyLimit) || 30;
   var STORES = [
-    { id:'bonjuk',   map:'https://naver.me/58NdQouU', mono:'🍚', name:'본죽&비빔밥 영등포구청역점',   loc:'영등포구청역',     desc:'든든하게 몸을 챙기는 죽 한 그릇의 마음' , reward:'메뉴 교환', item:'음료팩', ticket:'음료팩(배즙, 청매실즙, 양배추사과즙 중 1) 교환권', give:'음료 1팩을', daily:0, total:390, note:'배즙, 청매실즙, 양배추사과즙 중 택1' },
+    { id:'bonjuk',   map:'https://naver.me/58NdQouU', mono:'🍚', name:'본죽&비빔밥 영등포구청역점',   loc:'영등포구청역',     desc:'든든하게 몸을 챙기는 죽 한 그릇의 마음' , reward:'메뉴 교환', item:'음료1팩', ticket:'음료1팩(배즙, 청매실즙, 양배추사과즙 중 1) 교환권', give:'음료1팩을', daily:0, total:390, note:'배즙, 청매실즙, 양배추사과즙 중 택1' },
     { id:'dosirak',  map:'https://naver.me/FioIc93L', mono:'🍱', name:'본도시락 영등포구청점',        loc:'영등포구청역',     desc:'바쁜 하루 속 한 끼, 도시락에 담긴 정성' , reward:'2천 원 할인', daily:0, total:250 },
     { id:'easybrew', mono:'☕', mapq:'이지브루잉커피 양평동', name:'이지브루잉커피 직영점',       loc:'본그룹 본사 인근',  desc:'잠깐의 휴식, 커피 한 잔에 더하는 작은 참여' , reward:'2천 원 할인', prefix:'빵 ', daily:50, total:250, carry:true, note:'빵 구매 시에만 사용할 수 있어요' },
     { id:'ilmaggio', mono:'🥤', short:'일마지오', mapq:'일마지오 본그룹본사점', name:'카페 일마지오 본그룹본사점',   loc:'본그룹 본사',      desc:'잠깐의 휴식, 커피 한 잔에 더하는 작은 참여' , reward:'디저트 교환', item:'디저트', ticket:'디저트(마카롱 또는 마들렌) 교환권', give:'디저트를', daily:0, total:250, note:'마카롱 또는 마들렌 중 택1' },
-    { id:'jipbap',   nomap:true, only:'임직원, 입주사 고객 전용', mono:'🍽️', name:'본우리집밥 본그룹본사점',      loc:'본그룹 본사',      desc:'집밥 같은 한 끼로 전하는 다정한 마음' , reward:'디저트 교환', item:'피자설기', give:'피자설기를', daily:0, total:200, note:'당일 바로 사용 가능' },
+    { id:'jipbap',   nomap:true, only:'임직원, 입주사 고객 전용', mono:'🍽️', name:'본우리집밥 본그룹본사점',      loc:'본그룹 본사',      desc:'집밥 같은 한 끼로 전하는 다정한 마음' , reward:'디저트 교환', item:'크림찹쌀떡', give:'크림찹쌀떡을', daily:0, total:200, note:'당일 바로 사용 가능' },
     { id:'mengi',    mono:'🍜', name:'멘지 롯데마트 양평점',          loc:'양평동',          desc:'일상 속 따끈한 라멘 한 그릇의 행복' , reward:'메뉴 교환', item:'치킨가라아게', give:'치킨가라아게를', daily:0, total:100, note:'주문 1건당 1장 사용' },
     { id:'bansang',  mono:'🥣', name:'본우리반상 국회의사당역점',      loc:'여의도동',        desc:'솥밥과 화로로 만나는 한상의 정성' , reward:'2천 원 할인', daily:30, total:250, carry:true },
     { id:'gukbap',   mono:'🍲', name:'본가네국밥 영등포양평역점',   loc:'양평동',          desc:'얼큰하게 속을 채우는 국밥 한 그릇, 정성의 시작' , reward:'2천 원 할인', daily:0, total:250 }
@@ -1216,6 +1351,7 @@ var JS_CONFIG = {
     gauge.setAttribute('aria-label', '목표 ' + fmt(goal) + '그릇 중 ' + pct + '% 달성');
     $('goalPct').textContent = '(' + pct + '% 달성)';
     $('goalOf').textContent = '목표 ' + fmt(goal) + '그릇';
+    if($('homeCount')) $('homeCount').textContent = fmt(total);
     setBowl(pct);
     if(!animate || reduced){ countEl.textContent = fmt(total); return; }
     var from = parseInt(countEl.textContent.replace(/,/g,''), 10) || 0;
@@ -1469,7 +1605,7 @@ var JS_CONFIG = {
     if(s && state.vouchers && state.vouchers[s.id] && shownStore !== s.id && typeof renderVoucher === 'function'){ shownStore = s.id; setTimeout(renderVoucher, 0); }
     sel.value = s ? s.id : '';
     renderPicker();
-    storeNow.textContent = document.body.classList.contains('staff-mode') ? '임직원 전용 챌린지' : (s ? s.name : '영등포 참여 매장 8곳');
+    storeNow.textContent = document.body.classList.contains('staff-mode') ? '임직원 전용 챌린지' : document.documentElement.classList.contains('home-mode') ? 'HOME · 캠페인 안내' : (s ? s.name : '영등포 참여 매장 8곳');
     Array.prototype.forEach.call(storeList.children, function(li){
       var here = s && li.dataset.id === s.id;
       li.classList.toggle('here', !!here);
@@ -1786,6 +1922,7 @@ var JS_CONFIG = {
     var lg = (window.BON_LOGOS || {})[v.store], tl = $('tLogo');
     tl.parentNode.hidden = !lg; if(lg){ tl.src = lg; tl.alt = (s ? s.name : '') + ' 로고'; }
     tl.parentNode.classList.toggle('jip', v.store === 'jipbap');
+    tl.parentNode.classList.toggle('ilm', v.store === 'ilmaggio');
     $('ticketTitle').classList.toggle('long', rw.title.length > 12);
     $('voucherHead').textContent = (!sold && v.used) ? '맛있게 드세요' : '한 그릇이 채워졌어요';
     $('voucherSub').innerHTML = closed ? (isTotal(v.store) ? '준비한 ' + itemOf(v.store) + ' ' + storeById(v.store).total + '개가 선착순으로 모두 교환됐어요<br>정성은 한 그릇으로 기부됐어요' : '오늘 준비한 ' + cnameOf(v.store) + '이 선착순으로 모두 사용됐어요<br>' + (phaseOf(v.store).end > TODAY ? '내일 다시 참여해 주세요' : '오늘로 운영이 끝났어요') + ' · 정성은 한 그릇으로 기부됐어요')
@@ -2085,7 +2222,7 @@ var JS_CONFIG = {
       st.textContent = ph.state === 'live' ? '진행 중' : (ph.state === 'done' ? '종료' : md(ph.start) + ' 오픈');
       b.appendChild(nm); b.appendChild(st);
       b.addEventListener('click', function(){
-        if(s.id === FIXED_STORE){ close(); return; }
+        if(s.id === FIXED_STORE && !document.documentElement.classList.contains('home-mode') && !document.body.classList.contains('staff-mode')){ close(); return; }
         location.hash = s.id; location.reload();
       });
       li.appendChild(b); menu.appendChild(li);
@@ -2287,6 +2424,50 @@ var JS_CONFIG = {
     } else {
       openPw(enter, function(){ location.hash = ''; location.reload(); });
     }
+  })();
+
+  /* ---------- HOME (캠페인 안내) ---------- */
+  (function homePage(){
+    var isHome = document.documentElement.classList.contains('home-mode');
+    var menu = $('storeMenu');
+    if(menu){
+      var li = document.createElement('li');
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'sm-opt home-opt' + (isHome ? ' cur' : ''); b.setAttribute('role', 'option');
+      var nm = document.createElement('span'); nm.className = 'sm-nm'; nm.textContent = 'HOME · 캠페인 안내';
+      b.appendChild(nm);
+      b.addEventListener('click', function(){ menu.hidden = true; if(isHome){ window.scrollTo(0, 0); return; } location.hash = 'home'; location.reload(); });
+      li.appendChild(b); menu.insertBefore(li, menu.firstChild);
+    }
+    if(!isHome) return;
+    Array.prototype.forEach.call(document.querySelectorAll('.sm-opt.cur'), function(x){ if(!x.classList.contains('home-opt')) x.classList.remove('cur'); });
+    $('storeNow').textContent = 'HOME · 캠페인 안내';
+    document.title = '정성 한 그릇, 행복 한 그릇 · 본그룹 사회공헌 캠페인';
+    var ti = document.querySelector('.hero-title img'); if(ti) $('homeTitleImg').src = ti.src;
+    var yt = document.querySelector('a.yt-ch'); if(yt) $('homeYt').href = yt.href;
+    $('homeCsr').addEventListener('click', function(){ $('csrBtn').click(); });
+    var BR = { bonjuk:'영등포구청역점', dosirak:'영등포구청점', bansang:'국회의사당역점', gukbap:'영등포양평역점', mengi:'롯데마트 양평점', jipbap:'본그룹본사점', ilmaggio:'본그룹본사점', easybrew:'직영점' };
+    var grid = $('homeStores');
+    var order = STORES.slice().sort(function(a, b){ var pa = phaseOf(a.id), pb = phaseOf(b.id); return (pa.start || '9').localeCompare(pb.start || '9') || (pa.end || '').localeCompare(pb.end || ''); });
+    order.forEach(function(s){
+      var ph = phaseOf(s.id), rw = rwOf(null, s.id);
+      var el = document.createElement('button'); el.type = 'button';
+      el.className = 'hm-store' + (s.id === 'easybrew' ? ' wide' : '') + (s.id === 'jipbap' ? ' jip' : '') + (s.id === 'ilmaggio' ? ' ilm' : '');
+      el.setAttribute('aria-label', s.name + ' 매장 정보 보기');
+      var img = document.createElement('img'); img.src = (window.BON_LOGOS || {})[s.id] || ''; img.alt = ''; el.appendChild(img);
+      var br = document.createElement('span'); br.className = 'br'; br.textContent = BR[s.id] || ''; el.appendChild(br);
+      var r = document.createElement('span'); r.className = 'st rwc'; r.textContent = rw.hook; el.appendChild(r);
+      if(s.id === 'jipbap'){ var one = document.createElement('span'); one.className = 'pd'; one.textContent = '11.23 단 하루'; el.appendChild(one); }
+      el.addEventListener('click', function(){ openStoreSheet(s.id, (window.BON_LOGOS || {})[s.id]); });
+      grid.appendChild(el);
+    });
+    var ids = voucherIds();
+    if(ids.length){
+      var last = ids[ids.length - 1], a = $('homeMine');
+      a.hidden = false; a.href = '#' + last;
+      $('homeMineText').textContent = '오늘 받은 쿠폰 ' + ids.length + '장 보기';
+      a.addEventListener('click', function(e){ e.preventDefault(); location.hash = last; location.reload(); });
+    }
+    window.scrollTo(0, 0);
   })();
   fromHash();
   var ids = voucherIds();
