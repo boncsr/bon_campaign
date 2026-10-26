@@ -2447,7 +2447,7 @@ var JS_CONFIG = {
     $('homeCsr').addEventListener('click', function(){ $('csrBtn').click(); });
     var BR = { bonjuk:'영등포구청역점', dosirak:'영등포구청점', bansang:'국회의사당역점', gukbap:'영등포양평역점', mengi:'롯데마트 양평점', jipbap:'본그룹본사점', ilmaggio:'본그룹본사점', easybrew:'직영점' };
     var grid = $('homeStores');
-    var order = STORES.slice().sort(function(a, b){ var pa = phaseOf(a.id), pb = phaseOf(b.id); return (pa.start || '9').localeCompare(pb.start || '9') || (pa.end || '').localeCompare(pb.end || ''); });
+    var order = STORES.slice().sort(function(a, b){ return (phaseOf(a.id).week || 9) - (phaseOf(b.id).week || 9); });
     order.forEach(function(s){
       var ph = phaseOf(s.id), rw = rwOf(null, s.id);
       var el = document.createElement('button'); el.type = 'button';
@@ -2456,7 +2456,6 @@ var JS_CONFIG = {
       var img = document.createElement('img'); img.src = (window.BON_LOGOS || {})[s.id] || ''; img.alt = ''; el.appendChild(img);
       var br = document.createElement('span'); br.className = 'br'; br.textContent = BR[s.id] || ''; el.appendChild(br);
       var r = document.createElement('span'); r.className = 'st rwc'; r.textContent = rw.hook; el.appendChild(r);
-      if(s.id === 'jipbap'){ var one = document.createElement('span'); one.className = 'pd'; one.textContent = '11.23 단 하루'; el.appendChild(one); }
       el.addEventListener('click', function(){ openStoreSheet(s.id, (window.BON_LOGOS || {})[s.id]); });
       grid.appendChild(el);
     });
