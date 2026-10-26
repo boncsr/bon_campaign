@@ -1124,7 +1124,7 @@ var JS_CONFIG = {
     { id:'dosirak',  map:'https://naver.me/FioIc93L', mono:'🍱', name:'본도시락 영등포구청점',        loc:'영등포구청역',     desc:'바쁜 하루 속 한 끼, 도시락에 담긴 정성' , reward:'2천 원 할인', daily:0, total:250 },
     { id:'easybrew', mono:'☕', mapq:'이지브루잉커피 양평동', name:'이지브루잉커피 직영점',       loc:'본그룹 본사 인근',  desc:'잠깐의 휴식, 커피 한 잔에 더하는 작은 참여' , reward:'2천 원 할인', prefix:'빵 ', daily:50, total:250, carry:true, note:'빵 구매 시에만 사용할 수 있어요' },
     { id:'ilmaggio', mono:'🥤', short:'일마지오', mapq:'일마지오 본그룹본사점', name:'카페 일마지오 본그룹본사점',   loc:'본그룹 본사',      desc:'잠깐의 휴식, 커피 한 잔에 더하는 작은 참여' , reward:'디저트 교환', item:'디저트', ticket:'디저트(마카롱 또는 마들렌) 교환권', give:'디저트를', daily:0, total:250, note:'마카롱 또는 마들렌 중 택1' },
-    { id:'jipbap',   nomap:true, only:'임직원, 입주사 고객 전용', mono:'🍽️', name:'본우리집밥 본그룹본사점',      loc:'본그룹 본사',      desc:'집밥 같은 한 끼로 전하는 다정한 마음' , reward:'디저트 교환', item:'크림찹쌀떡', give:'크림찹쌀떡을', daily:0, total:200, note:'당일 바로 사용 가능' },
+    { id:'jipbap',   nomap:true, only:'임직원, 입주사 고객 전용', mono:'🍽️', name:'본우리집밥 본그룹본사점',      loc:'본그룹 본사',      desc:'집밥 같은 한 끼로 전하는 다정한 마음' , reward:'디저트 교환', item:'피자설기', give:'피자설기를', daily:0, total:200, note:'당일 바로 사용 가능' },
     { id:'mengi',    mono:'🍜', name:'멘지 롯데마트 양평점',          loc:'양평동',          desc:'일상 속 따끈한 라멘 한 그릇의 행복' , reward:'메뉴 교환', item:'치킨가라아게', give:'치킨가라아게를', daily:0, total:100, note:'주문 1건당 1장 사용' },
     { id:'bansang',  mono:'🥣', name:'본우리반상 국회의사당역점',      loc:'여의도동',        desc:'솥밥과 화로로 만나는 한상의 정성' , reward:'2천 원 할인', daily:30, total:250, carry:true },
     { id:'gukbap',   mono:'🍲', name:'본가네국밥 영등포양평역점',   loc:'양평동',          desc:'얼큰하게 속을 채우는 국밥 한 그릇, 정성의 시작' , reward:'2천 원 할인', daily:0, total:250 }
@@ -1682,7 +1682,7 @@ var JS_CONFIG = {
       : !kSel ? 'STEP 1 빈칸을 채워 주세요'
       : !mSel ? '정성을 보낼 사람을 골라 주세요'
       : !hasMsg ? '나만의 정성을 적어 주세요'
-      : (canGet ? '📮 정성과 행복 보내고 ' + rwOf(c.type, sel.value).hook + ' 받기' : '📮 정성과 행복 또 보내기');
+      : (canGet ? '📮 보내고 ' + rwOf(c.type, sel.value).hook + ' 받기' : '📮 정성 보내기');
     renderStock();
   }
   ta.addEventListener('input', refresh);
