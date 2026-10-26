@@ -7,7 +7,12 @@
 <meta name="theme-color" content="#560C0E">
 <meta name="format-detection" content="telephone=no">
 <meta name="description" content="응원 한마디가 영등포구 이웃의 식사 한 그릇이 되는 본그룹 사회공헌 캠페인">
-<title>정성 한 그릇 · 행복 한 그릇</title>
+<title>정성 한 그릇, 행복 한 그릇</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="본그룹 사회공헌 캠페인">
+<meta property="og:title" content="정성 한 그릇, 행복 한 그릇">
+<meta property="og:description" content="참여 1건마다 영등포구 이웃에게 식사 1그릇을 매칭 기부하는 본그룹 사회공헌 캠페인">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -924,7 +929,6 @@
     <div class="st-card" id="staffBoard" hidden>
       <div class="st-head">
         <h2 id="stWho">님의 도장판</h2>
-        <button class="st-link" id="stReset" type="button">다른 이름으로 등록</button>
       </div>
       <div class="st-count" aria-live="polite"><b id="stCount">0</b><span id="stOf">/ 4개 인증</span></div>
       <div class="st-bar" id="stBar" aria-hidden="true"><em class="st-goal-tag">4개 · 자동 응모</em><em class="st-sp-tag">8개 · 스페셜</em></div>
@@ -2211,7 +2215,7 @@ var JS_CONFIG = {
   })();
   (function storeMenu(){
     var btn = $('storeNow'), menu = $('storeMenu'); if(!btn || !menu) return;
-    var cur = storeById(FIXED_STORE); if(cur) document.title = '정성 한 그릇 · ' + cur.name;
+    var cur = storeById(FIXED_STORE); if(cur && !document.documentElement.classList.contains('home-mode')) document.title = '정성 한 그릇, 행복 한 그릇 · ' + cur.name;
     var order = STORES.slice().sort(function(a, b){ return (phaseOf(a.id).week || 9) - (phaseOf(b.id).week || 9); });
     order.forEach(function(s){
       var ph = phaseOf(s.id);
@@ -2412,7 +2416,7 @@ var JS_CONFIG = {
       status().then(function(ok){ btn.disabled = false; if(ok) toast(name + '님, 등록됐어요'); });
     });
     $('stPhone').addEventListener('input', function(){ this.value = this.value.replace(/\D/g, '').slice(0, 4); });
-    $('stReset').addEventListener('click', function(){
+    if($('stReset')) $('stReset').addEventListener('click', function(){
       delete me.name; delete me.phone4; keep(me); lastStamps = null;
       $('stName').value = ''; $('stPhone').value = ''; showJoin(); $('stName').focus();
     });
