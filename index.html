@@ -1097,7 +1097,8 @@
           <dt>발급 시각</dt><dd id="tIssued"></dd>
           <dt>상태</dt><dd id="tState">사용 가능</dd>
         </dl>
-        <p class="redeem-help" id="redeemHelp">카운터 직원에게 보여주세요</p>
+        <p class="redeem-help" id="redeemHelp" style="white-space:pre-line; word-break:keep-all; font-size:14.5px; letter-spacing:-0.02em">*바로 사용해 주세요.
+사용 순서에 따라 선착순 마감될 수 있습니다</p>
         <div class="staff-warn" id="staffWarn"><i aria-hidden="true">!</i><span>아래 버튼은 <b>매장 직원 전용</b>이에요 · 누르면 사용할 수 없어요</span></div>
         <button class="redeem staff" type="button" id="redeemBtn" aria-describedby="staffWarn"><span class="lbl" id="redeemLbl">[직원 전용] 사용 완료 처리<small>손님은 누르지 마세요</small></span></button>
         <div class="redeem-confirm" id="redeemConfirm" hidden role="alertdialog" aria-labelledby="rcText">
@@ -1946,7 +1947,7 @@ var JS_CONFIG = {
     $('staffWarn').hidden = sold || closed || !!v.used;
     var early = !sold && !closed && !v.used && tooEarly(v.store);
     if(early){ $('redeemBtn').hidden = true; $('staffWarn').hidden = true; $('redeemConfirm').hidden = true; }
-    $('redeemHelp').textContent = early ? '오전 ' + storeById(v.store).from + '시부터 사용할 수 있어요 · 그때 카운터 직원에게 보여주세요' : '카운터 직원에게 보여주세요';
+    $('redeemHelp').textContent = early ? '오전 ' + storeById(v.store).from + '시부터 사용할 수 있어요 · 그때 카운터 직원에게 보여주세요' : '*바로 사용해 주세요.\n사용 순서에 따라 선착순 마감될 수 있습니다';
     if(sold || closed || v.used){ $('redeemConfirm').hidden = true; }
     else if(!$('redeemConfirm').hidden){ $('redeemBtn').hidden = true; }
     var lg = (window.BON_LOGOS || {})[v.store], tl = $('tLogo');
@@ -2128,6 +2129,21 @@ var JS_CONFIG = {
     toast('쿠폰 사용 처리됐어요');
     flushPending();
   }
+  // ---- 마감 임박(남은 수량 5장 이하)일 때는 서버가 '사용 가능'이라고 답한 뒤에만 도장을 찍어요
+  var NEAR_LEFT = 5, checking = false;
+  function nearLimit(id){
+    var c = couponOf(id);
+    return !!(LIVE && c && c.known && !c.unlimited && typeof c.remaining === 'number' && c.remaining <= NEAR_LEFT);
+  }
+  // 최신 남은 수량을 서버에서 바로 받아와요 (성공 true / 실패 false)
+  function freshStats(cb){
+    var asked = voucherIds().filter(function(id){ return state.vouchers[id].seq != null; }).map(function(id){ return id + ':' + state.vouchers[id].seq; });
+    fetchT(API_URL + (API_URL.indexOf('?') < 0 ? '?' : '&') + 'fresh=' + Date.now() + (asked.length ? '&v=' + encodeURIComponent(asked.join(',')) : ''), { method:'GET' }, 10000)
+      .then(function(r){ return r.json(); })
+      .then(function(res){ if(!res || typeof res.total !== 'number') throw res; applyStats(res); if(res.mine) syncMine(res.mine, asked); cb(true); })
+      .catch(function(){ cb(false); });
+  }
+  function openConfirm(){ redeemBtn.hidden = true; $('redeemConfirm').hidden = false; $('rcCancel').focus(); }
   // 사용 처리 기록을 시트로 보내요 (화면은 이미 바뀌었으니 기다리지 않아요, 실패하면 다음에 다시 보내요)
   var flushing = false;
   function flushPending(){
@@ -2162,7 +2178,23 @@ var JS_CONFIG = {
     })
     .catch(function(){ flushing = false; setTimeout(flushPending, 8000); });
   }
-  redeemBtn.addEventListener('click', function(){ redeemBtn.hidden = true; $('redeemConfirm').hidden = false; $('rcCancel').focus(); });
+  redeemBtn.addEventListener('click', function(){
+    if(checking) return;
+    var cv = curV();
+    if(!(cv && nearLimit(cv.store))){ loadStats(); openConfirm(); return; }
+    // 마감 임박(5장 이하): 직원 버튼에서 남은 수량을 서버로 확인한 뒤에만 다음 단계로
+    checking = true; redeemBtn.disabled = true;
+    var lbl = $('redeemLbl'), old = lbl.innerHTML;
+    lbl.innerHTML = '남은 수량 확인 중…<small>잠시만 기다려 주세요</small>';
+    freshStats(function(ok){
+      checking = false; redeemBtn.disabled = false; lbl.innerHTML = old;
+      var v = curV();
+      if(!ok){ toast('남은 수량이 얼마 없어 확인이 필요해요\n잠시 후 다시 눌러 주세요'); return; }
+      if(!v || v.used) return;
+      if(v.void || isClosed(v.store)){ renderVoucher(); toast('방금 선착순이 마감됐어요\n이 쿠폰은 사용할 수 없어요'); return; }
+      openConfirm();
+    });
+  });
   $('rcCancel').addEventListener('click', function(){ $('redeemConfirm').hidden = true; redeemBtn.hidden = false; redeemBtn.focus(); });
   $('rcOk').addEventListener('click', function(){ $('redeemConfirm').hidden = true; finishRedeem(); });
 
@@ -2248,7 +2280,7 @@ var JS_CONFIG = {
   (function storeCopy(){
     var s = storeById(FIXED_STORE); if(!s) return;
     var ds = isEx(s.reward), nm = ds ? '교환권' : '할인권';
-    $('redeemHelp').textContent = '카운터 직원에게 보여주세요';
+    $('redeemHelp').textContent = '*바로 사용해 주세요.\n사용 순서에 따라 선착순 마감될 수 있습니다';
     $('ticketFine').innerHTML = nm + '은 발급한 당일에만 쓸 수 있어요 (1일 1장)<br>' + ruleOf(s);
     var cn = isEx(s.reward) ? '교환권' : '할인권', rp = ruleOf(s).split(' · ');
     $('noticeRule').textContent = cn + ' 사용: ' + (rp.length > 1 ? rp[0] + ', ' + rp[1] + (rp.length > 2 ? ' (' + rp.slice(2).join(', ') + ')' : '') : rp[0]);
