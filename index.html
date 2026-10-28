@@ -924,11 +924,11 @@
   <div class="wrap staff-body">
     <form class="st-card" id="staffJoin" novalidate>
       <h2>참여 등록</h2>
-      <p class="st-sub">한 번만 등록하면 쿠폰을 쓸 때마다 도장이 자동으로 찍혀요</p>
-      <div class="st-field"><label for="stName">이름</label><input id="stName" type="text" maxlength="20" autocomplete="name" placeholder="홍길동"></div>
-      <div class="st-field"><label for="stPhone">휴대폰 뒷자리 4자리</label><input id="stPhone" type="tel" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="1234"></div>
-      <button class="st-btn" id="stJoinBtn" type="submit">등록하고 도장판 보기</button>
-      <p class="st-fine">매장에서 QR로 참여할 때 쓰는 휴대폰(같은 브라우저)으로 등록해 주세요 · 등록 전에 쓴 쿠폰도 같은 휴대폰이면 모두 인정돼요</p>
+      <p class="st-sub">닉네임과 PIN 4자리를 정해 등록해요 · 실명이나 연락처는 받지 않아요</p>
+      <div class="st-field"><label for="stName">닉네임 (2~12자)</label><input id="stName" type="text" maxlength="12" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="예: 정성가득"></div>
+      <div class="st-field"><label for="stPhone">PIN 4자리 (직접 정하는 숫자)</label><input id="stPhone" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="숫자 4자리"></div>
+      <button class="st-btn" id="stJoinBtn" type="submit">등록 · 로그인하고 도장판 보기</button>
+      <p class="st-fine">⚠️ 매장에서 QR로 참여할 휴대폰 · 브라우저로 등록하고, 챌린지 기간 동안 <b>기기나 브라우저를 바꾸지 마세요</b> · 닉네임에 실명 · 사번 · 전화번호 · 생일은 쓰지 마세요 · 등록 전에 쓴 쿠폰도 같은 휴대폰 · 브라우저라면 모두 인정돼요</p>
     </form>
     <div class="st-card" id="staffBoard" hidden>
       <div class="st-head">
@@ -963,8 +963,13 @@
         <li>챌린지 기간: 2026.11.16(월) ~ 11.30(월)</li>
         <li>쿠폰을 받고 계산 시 매장 직원이 '사용 완료'를 눌러야 도장이 찍혀요</li>
         <li>한 매장에서 여러 번 참여해도 도장은 1개로 인정돼요</li>
-        <li>QR로 참여한 휴대폰·브라우저에서 등록해야 도장이 연결돼요 (다른 브라우저로 참여했다면 같은 이름·번호로 그 브라우저에서도 한 번 더 등록해 주세요)</li>
-        <li>입력한 이름·휴대폰 뒷자리는 경품 추첨과 안내에만 사용해요</li>
+        <li><b>기기 · 브라우저를 바꾸지 마세요.</b> 도장은 쿠폰을 받은 휴대폰 · 브라우저 기준으로 찍혀요. 기간 내내 같은 휴대폰, 같은 브라우저(예: 카카오톡으로 열었다면 계속 카카오톡)로 QR 참여와 도장 확인을 해 주세요</li>
+        <li>부득이하게 다른 브라우저로 참여했다면 그 브라우저에서도 같은 닉네임 · PIN으로 로그인해야 도장이 합쳐져요</li>
+        <li>브라우저 기록(사이트 데이터)을 지우면 그 브라우저로 모은 도장을 다시 불러올 수 없어요</li>
+        <li>닉네임에는 실명 · 사번 · 전화번호 · 생일을 쓰지 마세요 · 당첨자는 닉네임으로 게시판에 공지돼요</li>
+        <li>PIN은 다시 찾을 수 없어요 · 잊어버렸다면 같은 휴대폰 · 브라우저에서 새 닉네임으로 등록하면 그동안의 도장이 새 닉네임으로 옮겨져요</li>
+        <li>경품은 당첨된 닉네임으로 로그인한 도장판을 본인 휴대폰으로 보여주시면 드려요</li>
+        <li>개인정보(이름 · 연락처 등)는 받지 않아요 · PIN은 암호화해 저장해요</li>
       </ul>
     </div>
   </div>
@@ -1285,7 +1290,7 @@ var JS_CONFIG = {
     { id:'dosirak',  map:'https://naver.me/FioIc93L', mono:'🍱', name:'본도시락 영등포구청점',        loc:'영등포구청역',     desc:'바쁜 하루 속 한 끼, 도시락에 담긴 정성' , reward:'2천 원 할인', daily:0, total:250 },
     { id:'easybrew', mono:'☕', mapq:'이지브루잉커피 양평동', name:'이지브루잉커피 직영점',       loc:'본그룹 본사 인근',  desc:'잠깐의 휴식, 커피 한 잔에 더하는 작은 참여' , reward:'2천 원 할인', prefix:'빵 ', daily:50, total:250, carry:true, note:'빵 구매 시에만 사용할 수 있어요', from:11 },
     { id:'ilmaggio', mono:'🥤', short:'일마지오', mapq:'일마지오 본그룹본사점', name:'카페 일마지오 본그룹본사점',   loc:'본그룹 본사',      desc:'잠깐의 휴식, 커피 한 잔에 더하는 작은 참여' , reward:'디저트 교환', item:'디저트', ticket:'디저트(마카롱 또는 마들렌) 교환권', give:'디저트를', daily:0, total:250, note:'마카롱 또는 마들렌 중 택1' },
-    { id:'jipbap',   nomap:true, only:'임직원, 입주사 고객 전용', mono:'🍽️', name:'본우리집밥 본그룹본사점',      loc:'본그룹 본사',      desc:'집밥 같은 한 끼로 전하는 다정한 마음' , reward:'디저트 교환', item:'크림찹쌀떡', give:'크림찹쌀떡을', daily:0, total:200, note:'당일 바로 사용 가능' },
+    { id:'jipbap',   nomap:true, only:'임직원, 입주사 고객 전용', mono:'🍽️', name:'본우리집밥 본그룹본사점',      loc:'본그룹 본사',      desc:'집밥 같은 한 끼로 전하는 다정한 마음' , reward:'디저트 교환', item:'크림찹쌀떡', give:'크림찹쌀떡을', daily:0, total:280, note:'당일 바로 사용 가능' },
     { id:'mengi',    mono:'🍜', name:'멘지 롯데마트 양평점',          loc:'양평동',          desc:'일상 속 따끈한 라멘 한 그릇의 행복' , reward:'메뉴 교환', item:'치킨가라아게', give:'치킨가라아게를', daily:0, total:100, note:'주문 1건당 1장 사용' },
     { id:'bansang',  mono:'🥣', name:'본우리반상 국회의사당역점',      loc:'여의도동',        desc:'솥밥과 화로로 만나는 한상의 정성' , reward:'2천 원 할인', daily:30, total:250, carry:true },
     { id:'gukbap',   mono:'🍲', name:'본가네국밥 영등포양평역점',   loc:'양평동',          desc:'얼큰하게 속을 채우는 국밥 한 그릇, 정성의 시작' , reward:'2천 원 할인', daily:0, total:250 }
@@ -2435,24 +2440,28 @@ var JS_CONFIG = {
       Array.prototype.forEach.call(document.querySelectorAll('.sm-opt.cur'), function(x){ x.classList.remove('cur'); });
       var so = document.querySelector('.sm-opt.staff-opt'); if(so) so.classList.add('cur');
       window.scrollTo(0, 0);
-      if(me.name && me.phone4) status(); else showJoin();
+      if(me.nick && me.pin) status(); else showJoin();
     }
     function showJoin(){ $('staffJoin').hidden = false; $('staffBoard').hidden = true; }
     function status(){
       if(!LIVE){
         var st = {}; try { st = JSON.parse(localStorage.getItem(LKEY) || '{}') || {}; } catch(e){}
-        render({ ok:true, name:me.name, stamps:st });
+        render({ ok:true, name:me.nick, stamps:st });
         return Promise.resolve(true);
       }
-      return post({ op:'me', pw:me.pw, name:me.name, phone4:me.phone4 }).then(function(res){
+      return post({ op:'me', pw:me.pw, nick:me.nick, pin:me.pin }).then(function(res){
         if(res && res.code === 'bad_pw'){ delete me.pw; keep(me); location.reload(); return false; }
+        if(res && /^(taken|bad_nick|bad_pin)$/.test(res.code || '')){
+          delete me.nick; delete me.pin; keep(me); showJoin();
+          toast(res.message || '닉네임과 PIN을 확인해 주세요'); return false;
+        }
         if(!res || !res.ok){ toast((res && res.message) || '도장판을 불러오지 못했어요'); return false; }
-        render(res); return true;
+        render(res); return res.created ? 'created' : true;
       }).catch(function(){ toast('연결이 원활하지 않아요 잠시 후 다시 열어 주세요'); return false; });
     }
     function render(res){
       $('staffJoin').hidden = true; $('staffBoard').hidden = false;
-      $('stWho').textContent = (res.name || me.name) + '님의 도장판';
+      $('stWho').textContent = (res.name || me.nick) + '님의 도장판';
       var stamps = res.stamps || {}, n = 0;
       ORDER.forEach(function(id){ if(stamps[id]) n++; });
       $('stCount').textContent = n;
@@ -2483,19 +2492,20 @@ var JS_CONFIG = {
     }
     $('staffJoin').addEventListener('submit', function(e){
       e.preventDefault();
-      var name = $('stName').value.replace(/\s+/g, ''), p4 = $('stPhone').value.replace(/\D/g, '');
-      if(!name){ toast('이름을 입력해 주세요'); $('stName').focus(); return; }
-      if(p4.length !== 4){ toast('휴대폰 뒷자리 4자리를 입력해 주세요'); $('stPhone').focus(); return; }
-      me.name = name; me.phone4 = p4; keep(me);
+      var nick = $('stName').value.replace(/\s+/g, ''), pin = $('stPhone').value.replace(/\D/g, '');
+      if(nick.length < 2){ toast('닉네임을 2자 이상 입력해 주세요'); $('stName').focus(); return; }
+      if(/^\d+$/.test(nick) || /\d{4,}/.test(nick)){ toast('닉네임에 전화번호 · 생일 같은 숫자는 쓸 수 없어요'); $('stName').focus(); return; }
+      if(pin.length !== 4){ toast('PIN 숫자 4자리를 입력해 주세요'); $('stPhone').focus(); return; }
+      me.nick = nick; me.pin = pin; delete me.name; delete me.phone4; keep(me);
       var btn = $('stJoinBtn'); btn.disabled = true;
-      status().then(function(ok){ btn.disabled = false; if(ok) toast(name + '님, 등록됐어요'); });
+      status().then(function(ok){ btn.disabled = false; if(ok) toast(nick + '님, ' + (ok === 'created' ? '등록됐어요' : '로그인했어요')); });
     });
     $('stPhone').addEventListener('input', function(){ this.value = this.value.replace(/\D/g, '').slice(0, 4); });
     if($('stReset')) $('stReset').addEventListener('click', function(){
-      delete me.name; delete me.phone4; keep(me); lastStamps = null;
+      delete me.nick; delete me.pin; keep(me); lastStamps = null;
       $('stName').value = ''; $('stPhone').value = ''; showJoin(); $('stName').focus();
     });
-    document.addEventListener('visibilitychange', function(){ if(!document.hidden && me.name && !$('staffBoard').hidden) status(); });
+    document.addEventListener('visibilitychange', function(){ if(!document.hidden && me.nick && !$('staffBoard').hidden) status(); });
 
     if(me.pw){
       enter();
