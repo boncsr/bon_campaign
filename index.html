@@ -1845,7 +1845,7 @@ var JS_CONFIG = {
     $('stepA').classList.toggle('done', !!kSel);
     $('stepB').classList.toggle('done', hasMsg);
     var spx = sel.value ? phaseOf(sel.value) : null;
-    sendBtn.textContent = sending ? (slowSend ? '참여가 몰려 조금 걸리고 있어요…' : '보내는 중…') : !sel.value ? '매장을 먼저 골라 주세요'
+    sendBtn.textContent = sending ? (slowSend === 2 ? '참여가 몰려 조금 걸리고 있어요…' : slowSend ? '기록하는 중… 조금만 기다려 주세요' : '보내는 중…') : !sel.value ? '매장을 먼저 골라 주세요'
       : !openNow ? (spx.state === 'soon' ? mdKo(spx.start) + '에 오픈해요' : '운영이 끝난 매장이에요')
       : !kSel ? 'STEP 1 빈칸을 채워 주세요'
       : !mSel ? '정성을 보낼 사람을 골라 주세요'
@@ -1989,7 +1989,7 @@ var JS_CONFIG = {
 
     if(!pendingRid || pendingRid.store !== store) pendingRid = { store:store, id:String(deviceId).replace(/[^\w-]/g, '').slice(0, 10) + '-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6) };
     sending = true; slowSend = false; showBusy(false); refresh();
-    var slowT = setTimeout(function(){ slowSend = true; refresh(); }, 7000);
+    var slowT = setTimeout(function(){ slowSend = 1; refresh(); }, 6000), slowT2 = setTimeout(function(){ slowSend = 2; refresh(); }, 15000);
     fetchT(API_URL, {
       method:'POST',
       headers:{ 'Content-Type':'text/plain;charset=utf-8' },
@@ -2007,7 +2007,7 @@ var JS_CONFIG = {
       if(crowd){ showBusy(true); toast('참여가 몰리고 있어요\n잠시 후 다시 눌러 주세요'); }
       else toast(err.message || '응원을 보내지 못했어요 잠시 후 다시 보내 주세요');
     })
-    .then(function(){ clearTimeout(slowT); sending = false; slowSend = false; refresh(); });
+    .then(function(){ clearTimeout(slowT); clearTimeout(slowT2); sending = false; slowSend = false; refresh(); });
   });
 
   function showBusy(on){ var b = $('busyNote'); if(b) b.hidden = !on; if(on && b) b.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block:'nearest' }); }
